@@ -1,0 +1,60 @@
+---
+title: "echarts4r_demo"
+author: "Merlin Simsen Baratault"
+output: html_document
+---
+
+This is a demonstration of the `echarts4r` package in R, which allows for interactive and visually appealing charts. Below are examples of different types of charts that can be created using this package.
+
+```{r, Import library}
+library(echarts4r)
+```
+
+```{r, Line chart}
+df <- data.frame(
+  day = 1:7,
+  sales = c(12, 20, 15, 8, 25, 30, 18)
+)
+
+df |>
+  e_charts(day) |>
+  e_line(sales, smooth = TRUE, name = "Sales") |>
+  e_title("Weekly Sales Trend") |>
+  e_tooltip(trigger = "axis") |>
+  e_theme("shine")
+
+```
+
+```{r, Bar chart}
+df <- data.frame(
+  product = c("A", "B", "C", "D"),
+  sales_2022 = c(120, 200, 150, 80),
+  sales_2023 = c(130, 210, 160, 90)
+)
+
+df |>
+  e_charts(product) |>
+  e_bar(sales_2022, name = "2022 Sales") |>
+  e_bar(sales_2023, name = "2023 Sales") |>
+  e_title("Product Sales Comparison") |>
+  e_tooltip(trigger = "axis") |>
+  e_legend() |>
+  e_grid(left = "10%", right = "10%")
+```
+
+```{r, Pie chart}
+df <- data.frame(
+  category = c("Tech", "Clothes", "Food", "Books"),
+  share = c(45, 25, 20, 10)
+)
+
+df |>
+  e_charts(category) |>
+  e_pie(share, name = "Market Share", radius = "50%", label = list(formatter = "{b}: {d}%")) |>
+  e_title("Market Share by Category", left = "center", top = "10%") |>
+  e_tooltip(trigger = "item") |>
+  e_legend(orient = "vertical", right = "10%", top = "20%") |>
+  e_theme("dark")
+```
+
+
